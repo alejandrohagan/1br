@@ -1,8 +1,9 @@
 library(tidyverse)
 library(collapse)
 library(microbenchmark)
+library(tidypolars)
 
-rm(list=ls())
+
 set.seed(2024)
 
 measurement_vec=rnorm(1e9)
@@ -26,6 +27,10 @@ measurement_db <- dplyr::tbl(con,"measurement_db")
 
 
 measurement_dt <-   measurement_tbl |> data.table::setDT()
+
+
+measurement_pl <- measurement_tbl |> 
+  as_polars() 
 
 duckdb <- function(){
  out <-  measurement_db |> 
@@ -72,6 +77,21 @@ dt <- function(){
   return(out)
   
 }
+
+
+polars <- function(){
+
+out <- 
+  group_by(state) |> 
+  summarise(
+    min=min(measurement)
+    ,max=max(measurement)
+    ,mean=mean(measurement)
+  ) |> ungroup()
+
+return(out)
+}
+
 
 
 
