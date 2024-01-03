@@ -3,21 +3,10 @@ library(collapse)
 library(microbenchmark)
 library(tidypolars)
 
-
-set.seed(2024)
-
-measurement_vec=rnorm(1e9)
+fp <- here::here("R","1br","data","measurements.csv")
 
 
-state_vec <- sample(state.abb,size = 1e9,replace = TRUE)
-
-measurement_tbl <- tibble(
-  measurement=measurement_vec
-  ,state=state_vec
-)
-
-rm(state_vec,measurement_vec)
-rm(measurement_tbl)
+measurement_tbl <- data.table::fread(fp)
 
 con <- DBI::dbConnect(duckdb::duckdb())
 
