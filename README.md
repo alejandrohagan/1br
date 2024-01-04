@@ -38,6 +38,6 @@ note: you may need to change the file permission `$ chmod +x generate_data.R`
     -  save results in csv file
     
 - Additionally there is a function to covert the ggplot theme to the [bbc plot theme](https://bbc.github.io/rcookbook/)
-- There were alot of questions about data.table's benchmark so I'm trying to build an alternative benchmark function using the tictoc package but its wip
+- There were alot of questions about data.table's benchmark so I'm trying to build an alternative benchmark function using the tictoc package but its wip (`benchmark_fn.R`)
 
 -  If you see any issues or have suggestions of improvements, please let me know!
