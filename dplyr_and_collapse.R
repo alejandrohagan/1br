@@ -1,6 +1,7 @@
 library(tidyverse)
 library(data.table)
 library(microbenchmark)
+library(collapse)
 
 # free up memory to help with memory mgmt
 rm(list=ls())

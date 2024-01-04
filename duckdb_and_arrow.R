@@ -4,6 +4,7 @@ library(DBI)
 library(duckdb)
 library(tidyverse)
 library(microbenchmark)
+library(arrow)
 
 #load data and create duckdb connection
 
