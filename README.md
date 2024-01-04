@@ -16,7 +16,8 @@
     -  I ran the analysis in a [Saturn Cloud](https://saturncloud.io/) cluster, my computer struggled with bencmarking billion rows of data multiple times (you can specify how many rows of data you want generated if you want to run it locally)
       -   Cluster details are: A10G-G54XLarge - 16 cores - 64 GB RAM - 1 GPU - 40Gi Disk 
     -  I'm fairly new to tidypolars and data.table so if you see any issues with the script that I wrote please tell me!
-    -  The general format is that each functoin test is aggregate by their data workflow eg. sincee dplyr and collapse use regular data.frames they are kept together and since duckdb and arrow can leverage the same datasource, they can also be kept together
+    -  The general format is that each function test is aggregate by their data workflow eg. sincee dplyr and collapse use regular data.frames they are kept together and since duckdb and arrow can leverage the same datasource, they can also be kept together
+    -  I added `collect()` to most of the functions so that they are all returned to tibble format however this may add some variation in the results
 
  # Instructions
 
