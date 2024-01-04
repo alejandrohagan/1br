@@ -1,15 +1,17 @@
+library(tidyverse)
+library(data.table)
+library(microbenchmark)
+
+# free up memory to help with memory mgmt
 rm(list=ls())
 
+# load data and convert to tbl
 fp <- here::here("data","measurements.csv")
 
 
 measurement_tbl <- data.table::fread(fp) |> as_tibble()
 
-measurement_tbl |> 
-  collapse::fgroup_by(state) |> 
-  collapse::qsu()
-
-beepr::beep(sound=8)
+# write collapse and dplyr functions
 
 collapse <- function() {
   out <-   measurement_tbl |> 
@@ -33,24 +35,15 @@ dplyr <- function(){
   return(out)
 }
 
-
-collapse2 <- function(){
-   out <-  measurement_tbl |> 
-      collapse::fgroup_by(state) |> 
-      collapse::qsu()
-   
-   return(out)
-}
+#micro benchmarks
 
 bmarks <- microbenchmark(
   
   dplyr=dplyr()
   ,collapse=collapse()
-  ,collapse2=collapse2()
-  ,times = 2
+  ,times = 10
   ,unit = "s"
   )
 
-BRRR::skrrrahh(23)
 
 write.csv(bmarks,"dplyr_and_collapse_bmarks.csv")

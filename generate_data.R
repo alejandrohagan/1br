@@ -12,13 +12,10 @@ cli::cli_alert("dataset will be {prettyunits::pretty_num(input)} rows")
 
 set.seed(2024)
 
-measurement_vec <- stats::rnorm(input)
-
-state_vec <- base::sample(state.abb, size = input, replace = TRUE)
 
 measurement_tbl <-tibble::tibble(
-  measurement = measurement_vec
-  ,state = state_vec
+  measurement = stats::rnorm(input)
+  ,state = base::sample(state.abb, size = input, replace = TRUE)
 )
 
 cli::cli_h2("dataset created, creating directory")

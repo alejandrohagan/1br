@@ -1,22 +1,26 @@
+# load libraries
 
+library(tidypolars)
+library(tidyverse)
+
+# clear name space to hlep with memory management
 rm(list=ls())
+
+# load data and convert to polars tbl
 fp <- here::here("data","measurements.csv")
 
-measurement_tbl <- data.table::fread(fp)
-
-measurement_pl <- measurement_tbl |> as_tibble() |> 
-  as_polars() 
-
-beepr::beep(sound=8)
-
-rm(measurement_tbl)
+measurement_pl <- data.table::fread(fp) |> 
+  as_tibble() |> 
+  as_polars()  
 
 
+
+
+# create function to simulate results
 
 polars <- function(){
   
-  out <- 
-    measurement_pl |> 
+  out <- measurement_pl |> 
     group_by(state) |> 
     summarise(
       min=min(measurement)
@@ -27,13 +31,15 @@ polars <- function(){
   return(out)
 }
 
+
+# benchmark results
 bmarks <- microbenchmark(
   
   polars=polars()
-  ,times = 2
+  ,times = 10
   , unit = "s"
   )
 
-BRRR::skrrrahh(23)
+# save results
 
 write.csv(bmarks,"polars_bmarks.csv")
