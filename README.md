@@ -1,3 +1,7 @@
+
+![1br_results](https://github.com/alejandrohagan/1br/assets/87534364/e4acbea1-9894-449f-bfb7-6e522f24cc55)
+
+
 # Hi!
 
 -  This is the repo inspired by [Gunnar Morlng's](https://www.morling.dev/blog/one-billion-row-challenge/) 1 billion row challenge to see which functions / libraries are quickest in summarizing the mean, min and max of a 1 billion rows of record
