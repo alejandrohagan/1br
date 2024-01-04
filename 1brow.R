@@ -23,7 +23,7 @@ beepr::beep()
 
 files <- list.files(pattern = "_bmarks.csv")
 
-res <- read_csv(files) 
+res <- read_csv("results.csv") 
 
 ## graph results
 

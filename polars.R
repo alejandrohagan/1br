@@ -26,7 +26,8 @@ polars <- function(){
       min=min(measurement)
       ,max=max(measurement)
       ,mean=mean(measurement)
-    ) |> ungroup()
+    ) |> ungroup() |> 
+    collect()
   
   return(out)
 }
