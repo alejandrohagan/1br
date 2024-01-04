@@ -26,9 +26,9 @@ polars <- function(){
       min=min(measurement)
       ,max=max(measurement)
       ,mean=mean(measurement)
-    ) |> ungroup() |> 
-    collect()
-  
+    ) |> 
+    ungroup() |> 
+    tidypolars::to_r()
   return(out)
 }
 
