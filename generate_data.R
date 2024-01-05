@@ -1,24 +1,26 @@
 #!/usr/bin/env Rscript
 
-cli::cli_h1("creating dataset")
+library(data.table)
+
+print("creating dataset")
 
 input <-   base::commandArgs(trailingOnly = TRUE)
 
 input <- base::as.numeric(input)
 
-assertthat::assert_that(assertthat::is.number(input),msg = "Please input number")
+dataset_message <- paste0("dataset will be ",input," rows")
 
-cli::cli_alert("dataset will be {prettyunits::pretty_num(input)} rows")
+print(dataset_message)
 
 set.seed(2024)
 
 
-measurement_tbl <-tibble::tibble(
+measurement_tbl <-data.frame(
   measurement = stats::rnorm(input)
   ,state = base::sample(state.abb, size = input, replace = TRUE)
 )
 
-cli::cli_h2("dataset created, creating directory")
+print("dataset created, creating directory")
 
 base::dir.create("data", showWarnings = FALSE)
 
@@ -28,10 +30,12 @@ wd <- getwd()
 
 info <- wd |> base::list.files() |> base::file.info()
 
-info <- prettyunits::pretty_bytes(info$size[1])
+info <- (info$size[1])/1e6
 
-cli::cli_alert("saving dataset")
+print("saving dataset")
   
 data.table::fwrite(measurement_tbl, "measurements.csv")
 
-cli::cli_alert_info("finished saving dataset ({info}), available in {wd}")
+closing_message <- paste0("finished saving database (",info,"MB), available in ",wd)
+
+print(closing_message)
