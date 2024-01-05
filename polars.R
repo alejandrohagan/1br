@@ -1,7 +1,10 @@
 # load libraries
 
 library(tidypolars)
-library(tidyverse)
+library(dplyr)
+library(here)
+library(microbenchmark)
+library(data.table)
 
 # clear name space to hlep with memory management
 rm(list=ls())
@@ -10,7 +13,6 @@ rm(list=ls())
 fp <- here::here("data","measurements.csv")
 
 measurement_pl <- data.table::fread(fp) |> 
-  as_tibble() |> 
   as_polars()  
 
 
@@ -31,7 +33,6 @@ polars <- function(){
     tidypolars::to_r()
   return(out)
 }
-
 
 # benchmark results
 bmarks <- microbenchmark(

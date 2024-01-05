@@ -2,16 +2,18 @@
 
 library(DBI)
 library(duckdb)
-library(tidyverse)
+library(dplyr)
 library(microbenchmark)
+library(data.table)
 library(arrow)
+library(here)
 
 #load data and create duckdb connection
 
 fp <- here::here("data","measurements.csv")
 
 
-measurement_tbl <- data.table::fread(fp) |> as_tibble()
+measurement_tbl <- data.table::fread(fp)
 
 con <- DBI::dbConnect(duckdb::duckdb())
 

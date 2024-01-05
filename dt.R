@@ -1,7 +1,8 @@
 
 # load libraries
 library(data.table)
-library(tidyverse)
+library(microbenchmark)
+library(here)
 
 # clear name space to help with memory management
 rm(list=ls())
@@ -27,7 +28,7 @@ dt <- function(){
 
 #micro benchmarks
 
-bmarks <- microbenchmark(
+bmarks <- microbenchmark::microbenchmark(
   
   dt=dt()
   ,times = 10

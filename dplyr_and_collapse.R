@@ -1,7 +1,8 @@
-library(tidyverse)
+library(dplyr)
 library(data.table)
 library(microbenchmark)
 library(collapse)
+library(here)
 
 # free up memory to help with memory mgmt
 rm(list=ls())
@@ -10,7 +11,7 @@ rm(list=ls())
 fp <- here::here("data","measurements.csv")
 
 
-measurement_tbl <- data.table::fread(fp) |> as_tibble()
+measurement_tbl <- data.table::fread(fp)
 
 # write collapse and dplyr functions
 
@@ -35,6 +36,7 @@ dplyr <- function(){
     ) |> ungroup()
   return(out)
 }
+
 
 #micro benchmarks
 
