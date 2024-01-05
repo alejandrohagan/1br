@@ -20,22 +20,17 @@ measurement_tbl <-data.frame(
   ,state = base::sample(state.abb, size = input, replace = TRUE)
 )
 
-print("dataset created, creating directory")
+print("dataset created, beginning saving dataset")
 
-base::dir.create("data", showWarnings = FALSE)
 
-setwd("data")
+file = "measurements.csv"
 
-wd <- getwd()
-
-info <- wd |> base::list.files() |> base::file.info()
-
-info <- (info$size[1])/1e6
-
-print("saving dataset")
-  
 data.table::fwrite(measurement_tbl, "measurements.csv")
 
-closing_message <- paste0("finished saving database (",info,"MB), available in ",wd)
 
-print(closing_message)
+size = structure(file.info(file)$size, class = "object_size") |> format("auto")
+  
+
+
+message("Finished saving dataset \"", file, "\". Its file size is: ", size, ".")
+

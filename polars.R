@@ -2,7 +2,6 @@
 
 library(tidypolars)
 library(dplyr)
-library(here)
 library(microbenchmark)
 library(data.table)
 
@@ -10,9 +9,9 @@ library(data.table)
 rm(list=ls())
 
 # load data and convert to polars tbl
-fp <- here::here("data","measurements.csv")
 
-measurement_pl <- data.table::fread(fp) |> 
+
+measurement_pl <- data.table::fread("measurements.csv") |> 
   as_polars()  
 
 

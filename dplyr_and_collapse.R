@@ -2,16 +2,13 @@ library(dplyr)
 library(data.table)
 library(microbenchmark)
 library(collapse)
-library(here)
 
 # free up memory to help with memory mgmt
 rm(list=ls())
 
 # load data and convert to tbl
-fp <- here::here("data","measurements.csv")
 
-
-measurement_tbl <- data.table::fread(fp)
+measurement_tbl <- data.table::fread("measurements.csv")
 
 # write collapse and dplyr functions
 

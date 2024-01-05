@@ -2,16 +2,14 @@
 # load libraries
 library(data.table)
 library(microbenchmark)
-library(here)
 
 # clear name space to help with memory management
 rm(list=ls())
 
 # load data in DT format
 
-fp <- here::here("data","measurements.csv")
 
-measurement_dt <- data.table::fread(fp)
+measurement_dt <- data.table::fread("measurements.csv")
 
 
 # create function to simulate results
