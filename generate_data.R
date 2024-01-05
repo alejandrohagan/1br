@@ -1,6 +1,7 @@
 #!/usr/bin/env Rscript
 
 library(data.table)
+library(datasets)
 
 print("creating dataset")
 
@@ -14,11 +15,11 @@ print(dataset_message)
 
 set.seed(2024)
 
-
 measurement_tbl <-data.frame(
   measurement = stats::rnorm(input)
-  ,state = base::sample(state.abb, size = input, replace = TRUE)
+  ,state = base::sample(datasets::state.abb, size = input, replace = TRUE)
 )
+
 
 print("dataset created, beginning saving dataset")
 
