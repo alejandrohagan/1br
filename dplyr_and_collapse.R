@@ -1,14 +1,19 @@
+#!/usr/bin/env Rscript  
+
 library(dplyr)
 library(data.table)
 library(microbenchmark)
 library(collapse)
+library(here)
 
 # free up memory to help with memory mgmt
 rm(list=ls())
 
 # load data and convert to tbl
 
-measurement_tbl <- data.table::fread("measurements.csv")
+fp <- here::here("measurements.csv")
+
+measurement_tbl <- data.table::fread(fp)
 
 # write collapse and dplyr functions
 

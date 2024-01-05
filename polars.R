@@ -1,17 +1,21 @@
+#!/usr/bin/env Rscript
+
 # load libraries
 
 library(tidypolars)
 library(dplyr)
 library(microbenchmark)
 library(data.table)
+library(here)
 
 # clear name space to hlep with memory management
 rm(list=ls())
 
 # load data and convert to polars tbl
 
+fp <- here::here("measurements.csv")
 
-measurement_pl <- data.table::fread("measurements.csv") |> 
+measurement_pl <- data.table::fread(fp) |> 
   as_polars()  
 
 

@@ -1,17 +1,19 @@
-#library
+#!/usr/bin/env Rscript
 
+#library
 library(DBI)
 library(duckdb)
 library(dplyr)
 library(microbenchmark)
 library(data.table)
 library(arrow)
+library(here)
 
 #load data and create duckdb connection
 
+fp <- here::here("measurements.csv")
 
-
-measurement_tbl <- data.table::fread("measurements.csv")
+measurement_tbl <- data.table::fread(fp)
 
 con <- DBI::dbConnect(duckdb::duckdb())
 
@@ -38,28 +40,28 @@ duckdb <- function(){
 }
 
 
-arrow <- function(){
+# arrow <- function(){
+# 
+# out <- measurements_ar |> 
+#   group_by(state) |> 
+#   summarize(
+#     min=min(measurement,na.rm=TRUE)
+#     ,max=max(measurement,na.rm=TRUE)
+#     ,mean=mean(measurement,na.rm=TRUE)
+#   ) |> 
+#   ungroup() |> 
+#   collect()
+# 
+# return(out)
+# 
+# }
 
-out <- measurements_ar |> 
-  group_by(state) |> 
-  summarize(
-    min=min(measurement,na.rm=TRUE)
-    ,max=max(measurement,na.rm=TRUE)
-    ,mean=mean(measurement,na.rm=TRUE)
-  ) |> ungroup() |> 
-  collect()
-
-return(out)
-
-}
-
-#micro benchmarks
 
 
 bmarks <- microbenchmark(
   
   duckdb=duckdb()
-  ,arrow=arrow()
+  # ,arrow=arrow()
   ,times = 10
   , unit = "s"
   )

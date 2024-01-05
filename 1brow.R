@@ -3,22 +3,33 @@ library(ggplot2)
 library(forcats)
 library(stringr)
 library(readr)
+library(here)
 
 
 # import custom ggplot theme (bbc plot)
 ## https://bbc.github.io/rcookbook/
+dt_fp <- here::here("dt.R")
+
+# create file paths to script locations
+dplyr_and_collapse_fp <- here::here("dplyr_and_collapse.R")
+
+dudckdb_and_arrow_fp <- here::here("duckdb_and_arrow.R")
+
+polars_fp <- here::here("polars.R")
+
+#load bbcplot
 
 source("bbc_plot.R")
 
-# execute respective analysis
-source("dt.R")
-Sys.sleep(2)
-source("duckdb_and_arrow.R")
-Sys.sleep(2)
-source("polars.R")
-Sys.sleep(2)
-source("dplyr_and_collapse.R")
+# source scripts from terminal to avoid changes to the environment
 
+system2(dt_fp)
+Sys.sleep(2)
+system2(dplyr_and_collapse_fp)
+Sys.sleep(2)
+system2(dudckdb_and_arrow_fp)
+Sys.sleep(2)
+system2(polars_fp)
 
 #import results
 
