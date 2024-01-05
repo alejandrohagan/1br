@@ -1,7 +1,9 @@
-library(tidyverse)
-library(collapse)
-library(microbenchmark)
-library(tidypolars)
+library(dplyr)
+library(ggplot2)
+library(forcats)
+library(stringr)
+library(readr)
+
 
 # import custom ggplot theme (bbc plot)
 ## https://bbc.github.io/rcookbook/
@@ -11,19 +13,18 @@ source("bbc_plot.R")
 # execute respective analysis
 source("dt.R")
 Sys.sleep(2)
-source("duckdb.R")
+source("duckdb_and_arrow.R")
 Sys.sleep(2)
 source("polars.R")
 Sys.sleep(2)
 source("dplyr_and_collapse.R")
 
-beepr::beep()
 
 #import results
 
 files <- list.files(pattern = "_bmarks.csv")
 
-res <- read_csv("results.csv") 
+res <- readr::read_csv(files)
 
 ## graph results
 
